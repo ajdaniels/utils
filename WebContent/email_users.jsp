@@ -12,7 +12,7 @@
 	ResultSet rst = null;
 	Statement stmt = null;
 
-	String result;
+	String result="";
 	// Recipient's email ID needs to be mentioned.
 	String to = "webtools@ucsc.edu";
 
