@@ -73,10 +73,11 @@
 
 	catch (MessagingException mex) {
 		mex.printStackTrace();
-		//result = "Error: unable to send message....";
+		result = "Error: unable to send message....";
 	} catch (Exception ex) {
 		out.println(ex.getMessage());
-	}
+		result = "Error: unable to send message....";
+		}
 %>
 <html>
 <head>
