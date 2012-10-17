@@ -1,4 +1,7 @@
 <%@ page language="java" import="java.sql.*"%>
+<%@page import="java.io.InputStream" %>
+<%@page import="java.net.*" %>
+
 <%
 	String DRIVER = "org.gjt.mm.mysql.Driver";
 	Class.forName(DRIVER).newInstance();
@@ -6,28 +9,21 @@
 	Connection con = null;
 	ResultSet rst = null;
 	Statement stmt = null;
+	String db_name = "cascade_dev";
+	String url = (String)request.getRequestURL().toString();
+	//out.println(url);	
+ 	if(url.indexOf("wcms-test")>0){
+		db_name="casacde_tst";
+	}
 
-	/*
-
-	 test
-	 username="wcms_admin" 
-	 password="cHoK1at3"
-	 driverClassName="com.mysql.jdbc.Driver" 
-	 url="jdbc:mysql://apm-dev-mysql.ucsc.edu:3306/cascade_dev
-	 username="wcms_admin"
-	 password="cHoK1at3"
-	 driverClassName="com.mysql.jdbc.Driver"
-	 url="jdbc:mysql://apm-dev-mysql.ucsc.edu/cascade_dev?useUnicode=true&amp;characterEncoding=UTF-8"
-	
-	 */
 	try {
-		String url = "jdbc:mysql://apm-dev-mysql.ucsc.edu/cascade_tst?user=wcms_admin&password=cHoK1at3";
+		
+	        String db_url = "jdbc:mysql://apm-dev-mysql.ucsc.edu/" + db_name + "?user=wcms_admin&password=cHoK1at3";
 
 		int i = 1;
-		con = DriverManager.getConnection(url);
+		con = DriverManager.getConnection(db_url);
 		stmt = con.createStatement();
-		rst = stmt
-				.executeQuery("select id from cxml_site where name ='"
+		rst = stmt.executeQuery("select id from cxml_site where name ='"
 						+ request.getParameter("siteName") + "'");
 		while (rst.next()) {
 %>
